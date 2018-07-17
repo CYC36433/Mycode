@@ -2,25 +2,36 @@
 
 > 弘泰公司基于node和vue的敏捷全栈开发框架
 
-## Build Setup
+## 运行调试与打包
 
 ``` bash
-# install dependencies
-npm install
+# 初始化安装依赖，cnpm的安装自行百度
+cnpm install
 
-# serve with hot reload at localhost:8080
+# 本地运行服务端、客户端
 npm run dev
 
-# build for production with minification
+# 单独运行服务端
+npm run server
+
+# 单独运行客户端
+npm run client
+
+# 打包客户端代码
 npm run build
 
-# build for production and view the bundle analyzer report
-npm run build --report
+# 打包服务端代码
+npm run buildserver
 ```
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
 ## 框架特性
-1. 三端全栈。数据库端mysql、服务端nodeji、客户端vue+element
+1. 三端全栈。数据库端mysql、服务端nodejs、客户端vue2+element
 1. 登陆页、主页、页面结构、菜单、工作区、地图、登出...
 1. 与服务端使用jwt保持上下文，前后端完全分离
+1. 数据库表管理菜单，方便调整菜单结构
+1. 自带用户管理、角色管理、权限管理、日志管理等系统功能
+1. 服务端具备jwt、router接口文件独立、文件上传下载、数据redis缓存、excel解析及文档生成、定时任务、log4js日志输出、websocket等能力
+1. 开发中心配备快速服务端及客户端设置、模块市场、模块共享、菜单设置、接口管理等功能
+1. 打包部署一站式，同时可打包服务端客户端代码，客户端服务端运行于同一端口，客户端静态文件使用koa-static承载，打包后的代码方便配置
