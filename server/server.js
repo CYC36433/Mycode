@@ -13,14 +13,14 @@ app.use(bodyParser()) //body解析中间件
 require('./mv/cors') //跨域中间件
 require('./mv/auth') //验证、token中间件
 
-const router = require('./routes/apirouter')
+const router = require('./routes/apirouter') //服务端接口路由中间件
 app.use(router.routes())
-require('./dev/router')
+require('./dev/router') //开发中间相关服务端接口路由，此路由在打包后会失效，请放心使用
 
 const path = require('path')
 const serve = require('koa-static')
 const static = serve(path.resolve(__dirname, '..'))
-app.use(static)
+app.use(static) //静态文件服务器，承载客户端
 
 //启动app
 const config = require('./config')
