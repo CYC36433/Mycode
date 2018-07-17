@@ -39,9 +39,15 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 1. 打包部署一站式，同时可打包服务端客户端代码，客户端服务端运行于同一端口，客户端静态文件使用koa-static承载，打包后的代码方便配置
 
 ## 新手引导
-> 准备开发环境：nodejs、vscode、git，安装cnpm，请自行百度
+> 准备开发环境：nodejs、vscode、git、mysql，安装cnpm，请自行百度
 
 > 下载框架源码，请使用git的clone功能，或者直接下载zip包，然后在vscode中打开自己的代码所在文件夹，在vscode中开发即可
+
+> 安装好mysql后，借助Navicat工具创建数据库并执行database.sql文件，在server/config.json中配置自己的数据库
+
+> 为避免后期服务端功能冲突，务必修改自己的项目编码，server/config.json中的project_code值为与其他人不冲突的字符串（后期我们会专门在开发中心进行统一管理）
+
+> 如果使用缓存，自行安装redis
 
 > 开发前先初始化 cnpm install
 
