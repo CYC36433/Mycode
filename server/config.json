@@ -1,0 +1,22 @@
+{
+    "project_code": "joseph",
+    "PORT": 3000,
+    "secret": "josephjwtsecret",
+    "basedb": {
+        "name": "basedb",
+        "client": "mysql",
+        "connection": {
+            "host": "127.0.0.1",
+            "user": "root",
+            "password": "123456",
+            "database": "maoqiao",
+            "timezone": "08:00"
+        }
+    },
+    "redis": {
+        "host": "172.16.35.50",
+        "port": 6379
+    },
+    "hasdbs": true,
+    "origins": ["http://localhost:3000", "http://localhost:8080", "http://localhost"]
+}

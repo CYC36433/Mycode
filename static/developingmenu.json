@@ -1,0 +1,45 @@
+[{
+    "id": 99,
+    "pid": 0,
+    "name": "开发中心",
+    "path": "/",
+    "component": "layout/app",
+    "type": 100,
+    "iconCls": "icon-shoubing",
+    "disabled": 0,
+    "hidden": 0,
+    "redirect": ""
+}, {
+    "id": 100,
+    "pid": 99,
+    "name": "服务端配置",
+    "path": "/serverconfig",
+    "component": "modules/test",
+    "type": 100,
+    "iconCls": "icon-che",
+    "disabled": 0,
+    "hidden": 0,
+    "redirect": null
+}, {
+    "id": 101,
+    "pid": 99,
+    "name": "接口管理",
+    "path": "/apimanager",
+    "component": "modules/dev/apimanager",
+    "type": 100,
+    "iconCls": "icon-che",
+    "disabled": 0,
+    "hidden": 0,
+    "redirect": null
+}, {
+    "id": 102,
+    "pid": 99,
+    "name": "菜单模块管理",
+    "path": "/menuset",
+    "component": "modules/dev/menuset",
+    "type": 100,
+    "iconCls": "icon-che",
+    "disabled": 0,
+    "hidden": 0,
+    "redirect": null
+}]
