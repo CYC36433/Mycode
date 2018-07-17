@@ -37,3 +37,12 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 1. 服务端具备jwt、router接口文件独立、文件上传下载、数据redis缓存、excel解析及文档生成、定时任务、log4js日志输出、websocket等能力
 1. 开发中心配备快速服务端及客户端设置、模块市场、模块共享、菜单设置、接口管理等功能
 1. 打包部署一站式，同时可打包服务端客户端代码，客户端服务端运行于同一端口，客户端静态文件使用koa-static承载，打包后的代码方便配置
+
+## 新手引导
+> 准备开发环境：nodejs、vscode、git，安装cnpm，请自行百度
+
+> 下载框架源码，请使用git的clone功能，或者直接下载zip包，然后在vscode中打开自己的代码所在文件夹，在vscode中开发即可
+
+> 开发前先初始化 cnpm install
+
+> 运行及调试，建议使用vscode中的debug功能启动服务端，启动客户端使用命令npm run client
