@@ -28,7 +28,7 @@ npm run buildserver
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
-## 框架特性
+## 框架特性（未全部完成，持续更新中）
 1. 三端全栈。数据库端mysql、服务端nodejs、客户端vue2+element
 1. 登陆页、主页、页面结构、菜单、工作区、地图、登出...
 1. 与服务端使用jwt保持上下文，前后端完全分离
