@@ -143,7 +143,7 @@ overflow-x: hidden;
   }
   #logo {
     width: 200px;
-    height: 71px;
+    height: 50px;
     background: url(./logo.png);
   }
   #topright {
