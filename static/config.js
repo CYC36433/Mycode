@@ -1,5 +1,5 @@
 const _system_config = {
-    title: '前端敏捷开发框架',
+    title: '弘泰全栈框架',
     wxQR: true, //是否启用微信二维码登陆
     logo: 'logo.png',
     logoWidth: 230,

@@ -23,7 +23,7 @@
 </template>
 
 <script>
-    import './iconfont'
+    import '@/assets/iconfont'
     export default {
         name: 'menuCom',
         data() {

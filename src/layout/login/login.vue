@@ -2,6 +2,8 @@
     <div>
         <div id='container' @keyup.enter="login('form')">
             <div class="title-wrapper">
+              <iconfont name="icon-htwater" style="width:65px;height:65px;"></iconfont>
+              <span>{{title}}</span>
             </div>
             <div class="form-wrapper">
                 <div class="form-inner-wrapper">
@@ -66,6 +68,7 @@ export default {
   },
   data() {
     return {
+      title:config.title,
         dialogFormVisible:false,
         formLabelWidth: '100px',
         wxinfo:{},
@@ -192,13 +195,10 @@ body {
   margin: 0 auto;
   padding-top: 100px;
 }
-.title-wrapper {
-  margin-left: 15px;
-  width: 657px;
-  height: 66px;
-  overflow: hidden;
-  background: url(./login_title.png) no-repeat;
+.title-wrapper *{
+  color:white;vertical-align: middle;margin-left:10px;
 }
+.title-wrapper span{font-size:30px;letter-spacing: 6px;}
 .form-wrapper {
   position: relative;
   height: 391px;

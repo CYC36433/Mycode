@@ -2,7 +2,9 @@
     <el-container class="appcontainer">
       <el-aside :style="sidestyle" id='leftside'>
         <el-scrollbar>
-        <div id='logo'></div>
+        <div id='logo'>
+          <iconfont name="icon-htwater" style="width:40px;height:40px;"></iconfont><span>{{title}}</span>
+        </div>
         <appmenu :menuexpand="menuexpand"></appmenu>
         </el-scrollbar>
       </el-aside>
@@ -29,10 +31,17 @@
 <script>
   import menu from './menu/menu.vue'
   import request from '@/util/request'
+  import {title} from '../../static/config'
+  import iconfont from '@/components/iconfont'
   export default {
     name: 'index_page',
+    components:{
+      iconfont,
+      appmenu: menu
+    },
     data() {
       return {
+        title,
         user: {},
         menuexpand:true,
         breadlist:null
@@ -42,9 +51,6 @@
       sidestyle(){
         return {width:this.menuexpand?"200px":"64px"}
       }
-    },
-    components: {
-      appmenu: menu
     },
     watch:{
       $route() {
@@ -144,8 +150,15 @@ overflow-x: hidden;
   #logo {
     width: 200px;
     height: 50px;
-    background: url(./logo.png);
+    background: rgb(31, 45, 61);
+    color:#84c0ff;padding-left:10px;
   }
+   #logo *{
+     vertical-align: middle;margin-top: 5px;
+   }
+   #logo span{
+     margin-left:15px;font-size:18px;letter-spacing: 3px;font-weight: bold;
+   }
   #topright {
     float: right;
     margin-right: 10px;
