@@ -41,11 +41,10 @@ let config = {
                 to: ''
             }
         ]),
-        new UglifyJsPlugin({ //这里是压缩的配置
+        new UglifyJsPlugin({
             uglifyOptions: {
-                compress: {
-                    warnings: false
-                }
+                mangle: false,
+                compress: { warnings: false }
             },
             sourceMap: false,
             parallel: true
