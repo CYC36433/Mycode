@@ -1,6 +1,7 @@
 const { dbs } = require("../helper/dbs")
 const jwt = require('jsonwebtoken')
 const axios = require('axios')
+const config = require('../config')
 
 async function getUsers(params) {
     var u = await dbs("htbus").select("*").from("sys_user")
@@ -73,7 +74,7 @@ async function wxlogin(params) {
         }
     }
     //获取wxcode对应的wxid
-    var info = await axios.get('http://122.227.159.82:48088/getUser', { params: { code: params.wxcode } });
+    var info = await axios.get(config.api_htwx, { params: { code: params.wxcode } });
     info = info.data;
     if (info.openid) {
         //检查该微信用户的openid有没有绑定系统账号

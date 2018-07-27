@@ -18,5 +18,6 @@
         "port": 6379
     },
     "hasdbs": true,
-    "origins": ["http://localhost:3000", "http://localhost:8080", "http://localhost"]
+    "origins": ["http://localhost:3000", "http://localhost:8080", "http://localhost"],
+    "api_htwx": "http://122.227.159.82:48088/getUser"
 }
