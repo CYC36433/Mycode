@@ -19,7 +19,7 @@ require('./dev/router') //开发中心相关服务端接口路由，此路由在
 
 const path = require('path')
 const serve = require('koa-static')
-const static = serve(path.resolve(__dirname, '..'))
+const static = serve(path.resolve(__dirname, '../client'))
 app.use(static) //静态文件服务器，承载客户端
 
 //启动app
