@@ -11,7 +11,7 @@
  Target Server Version : 50717
  File Encoding         : 65001
 
- Date: 17/07/2018 14:17:18
+ Date: 31/07/2018 13:53:45
 */
 
 SET NAMES utf8mb4;
@@ -157,16 +157,15 @@ INSERT INTO `sys_dist` VALUES (330283, '奉化区');
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_log`;
 CREATE TABLE `sys_log`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `username` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '用户名',
-  `operation` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '用户操作',
-  `method` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '请求方法',
-  `params` varchar(5000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '请求参数',
-  `time` bigint(20) NULL DEFAULT NULL COMMENT '执行时长(毫秒)',
-  `ip` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'IP地址',
-  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `logtm` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP COMMENT '日志时间',
+  `logtype` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '日志类别，自行设置',
+  `logmsg` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '日志信息',
+  `user` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '用户信息，自行设置',
+  `tag1` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '其他信息1',
+  `tag2` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '其他信息2',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '系统操作日志表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -318,8 +317,9 @@ CREATE TABLE `sys_user`  (
   `status` tinyint(4) NULL DEFAULT 1 COMMENT '状态  0：禁用   1：正常',
   `dept_id` bigint(20) NULL DEFAULT NULL COMMENT '部门ID',
   `addvcd` int(6) NULL DEFAULT NULL COMMENT '所属区县id',
-  `order_num` double(20, 2) NOT NULL COMMENT '排序',
+  `order_num` double(20, 2) NULL DEFAULT NULL COMMENT '排序',
   `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `wxid` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '微信用户的openid',
   PRIMARY KEY (`user_id`) USING BTREE,
   UNIQUE INDEX `username`(`username`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户表' ROW_FORMAT = Dynamic;
@@ -327,14 +327,14 @@ CREATE TABLE `sys_user`  (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES (1, 'jokki', '$2a$10$uxyc3muaiwsy7X/gKrc5leNi/EtIRt9A.0aABl6IzG70kJKckUWku', NULL, NULL, NULL, 1, NULL, NULL, 100.00, NULL);
-INSERT INTO `sys_user` VALUES (2, 'hjw', '$2a$10$GkHX6wBw7LphFOx7YJo5musxXqRjdloPgfbtcHNmB.fCf9p8PiJIO', NULL, NULL, NULL, 1, NULL, NULL, 200.00, NULL);
-INSERT INTO `sys_user` VALUES (4, 'admin', 'admin', '管理员2', NULL, NULL, 1, NULL, NULL, 300.00, NULL);
-INSERT INTO `sys_user` VALUES (14, 'maoqiao', '$2a$10$ac4fcs.JPHQnfzvr/Ko0xutAFfa9tFRTVjTci56HTxzrTRqRNk2p.', NULL, NULL, NULL, 1, NULL, NULL, 400.00, '2018-04-18 15:45:32');
-INSERT INTO `sys_user` VALUES (15, 'test1', '$2a$10$Rvji9zOlsVV7NQUlybubH.wLZltgv/b03uVmeh3rp7fEQuMQio5Ka', NULL, '11', '1231', 1, NULL, NULL, 500.00, '2018-04-18 15:49:32');
-INSERT INTO `sys_user` VALUES (17, 'maoqiao1', '$2a$10$QtL7yxG5k.ROoch060o4x.VCF/Y5fBbHUNlFBEhH9GkwQCXE29/9K', NULL, NULL, NULL, 1, NULL, NULL, 600.00, '2018-04-18 16:28:44');
-INSERT INTO `sys_user` VALUES (18, 'maoqiao2', '$2a$10$n5OdjgjEtYd9aWCNH8Euje2SxqKj.5BpdNGbmMbDc11HVs0w5eSyi', NULL, NULL, NULL, 1, NULL, NULL, 700.00, '2018-04-18 16:29:09');
-INSERT INTO `sys_user` VALUES (19, 'zzz', '$2a$10$XC84H3LHC685x8la2N4xxuo1GIhFAwpl.K.99qxOdUCxwiNbVe2..', NULL, '', '', 1, NULL, NULL, 800.00, '2018-04-19 16:31:23');
+INSERT INTO `sys_user` VALUES (1, 'jokki', '$2a$10$uxyc3muaiwsy7X/gKrc5leNi/EtIRt9A.0aABl6IzG70kJKckUWku', NULL, NULL, NULL, 1, NULL, NULL, 100.00, NULL, NULL);
+INSERT INTO `sys_user` VALUES (2, 'hjw', '$2a$10$GkHX6wBw7LphFOx7YJo5musxXqRjdloPgfbtcHNmB.fCf9p8PiJIO', NULL, NULL, NULL, 1, NULL, NULL, 200.00, NULL, NULL);
+INSERT INTO `sys_user` VALUES (4, 'admin', 'admin', '管理员2', NULL, NULL, 1, NULL, NULL, 300.00, NULL, 'oCn9v0_vAsFHHe6CB7rlxcxkn1lE');
+INSERT INTO `sys_user` VALUES (14, 'maoqiao', '$2a$10$ac4fcs.JPHQnfzvr/Ko0xutAFfa9tFRTVjTci56HTxzrTRqRNk2p.', NULL, NULL, NULL, 1, NULL, NULL, 400.00, '2018-04-18 15:45:32', '');
+INSERT INTO `sys_user` VALUES (15, 'test1', '$2a$10$Rvji9zOlsVV7NQUlybubH.wLZltgv/b03uVmeh3rp7fEQuMQio5Ka', NULL, '11', '1231', 1, NULL, NULL, 500.00, '2018-04-18 15:49:32', NULL);
+INSERT INTO `sys_user` VALUES (17, 'maoqiao1', '$2a$10$QtL7yxG5k.ROoch060o4x.VCF/Y5fBbHUNlFBEhH9GkwQCXE29/9K', NULL, NULL, NULL, 1, NULL, NULL, 600.00, '2018-04-18 16:28:44', NULL);
+INSERT INTO `sys_user` VALUES (18, 'maoqiao2', '$2a$10$n5OdjgjEtYd9aWCNH8Euje2SxqKj.5BpdNGbmMbDc11HVs0w5eSyi', NULL, NULL, NULL, 1, NULL, NULL, 700.00, '2018-04-18 16:29:09', NULL);
+INSERT INTO `sys_user` VALUES (19, 'zzz', '$2a$10$XC84H3LHC685x8la2N4xxuo1GIhFAwpl.K.99qxOdUCxwiNbVe2..', NULL, '', '', 1, NULL, NULL, 800.00, '2018-04-19 16:31:23', NULL);
 
 -- ----------------------------
 -- Table structure for sys_user_role
