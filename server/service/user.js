@@ -124,11 +124,19 @@ async function getMenu(params, ctx) {
     let result = await dbs('base').raw(sql, [ctx.user.user_id])
     return result[0]
 }
+async function modulelog(params, ctx) {
+    let username = ctx.user.realname,
+        menuname = params.name,
+        path = params.path;
+
+    log('modulevist', `${username}访问了菜单模块：${menuname}`, ctx.user_id, path)
+}
 module.exports = {
     getUsers,
     login,
     wxlogin,
     bindwx,
     current,
-    getMenu
+    getMenu,
+    modulelog
 }

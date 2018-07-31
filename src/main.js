@@ -86,10 +86,17 @@ if (VueCookies.get('token')) {
 }
 
 function initVue() {
+    var r = new Router({
+        routes: routerData
+
+    });
+    r.afterEach((to, from) => {
+        request.get('/api/user/modulelog', { name: to.name, path: to.path });
+    });
     new Vue({
         el: '#app',
         template: '<div id="app"><router-view></router-view></div>',
-        router: new Router({ routes: routerData }),
+        router: r,
         store,
         created() {
             if (!this.$cookies.get('token')) {
