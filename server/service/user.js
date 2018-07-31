@@ -22,7 +22,7 @@ async function login(params) {
             user_id: user[0].user_id,
             realname: user[0].realname
         }
-        let token = jwt.sign(userToken, global.secret, { expiresIn: '2h' })
+        let token = jwt.sign(userToken, global.secret, { expiresIn: config.login_expires })
         return {
             result: true,
             loginmessage: '登陆成功',
@@ -52,7 +52,7 @@ async function bindwx(params) {
             user_id: user[0].user_id,
             realname: user[0].realname
         }
-        let token = jwt.sign(userToken, global.secret, { expiresIn: '2h' })
+        let token = jwt.sign(userToken, global.secret, { expiresIn: config.login_expires })
         return {
             result: true,
             loginmessage: '绑定成功、登陆成功',

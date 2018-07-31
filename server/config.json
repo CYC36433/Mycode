@@ -19,5 +19,6 @@
     },
     "hasdbs": true,
     "origins": ["http://localhost:3000", "http://localhost:8080", "http://localhost"],
-    "api_htwx": "http://122.227.159.82:48088/getUser"
+    "api_htwx": "http://122.227.159.82:48088/getUser",
+    "login_expires": "2h"
 }
