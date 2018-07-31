@@ -47,6 +47,7 @@ global.app.use(async(ctx, next) => {
 //需要验证的token路由设置
 const jwtKoa = require('koa-jwt')
 let paths = [
+    /^\//,
     /^\/api\/user\/login/,
     /^\/api\/user\/wxlogin/,
     /^\/api\/user\/bindwx/,
