@@ -1,4 +1,5 @@
 const { dbs } = require("../helper/dbs")
+const { log } = require("../helper/log")
 const jwt = require('jsonwebtoken')
 const axios = require('axios')
 const config = require('../config')
@@ -15,6 +16,8 @@ async function login(params) {
         }
     }
     var user = await dbs('base')('sys_user').where(params).select('*')
+        //异步记录日志
+    log('login', user[0].realname + '登陆了系统', user[0].user_id, null, null);
     if (user && user.length) {
         let userToken = {
             username: user[0].username,
@@ -44,6 +47,8 @@ async function bindwx(params) {
         }
     }
     var user = await dbs('base')('sys_user').where({ username: params.username, password: params.password });
+    //异步记录日志
+    log('login', user[0].realname + '登陆了系统', user[0].user_id, null, null);
     if (user && user.length) {
         var b = await dbs('base')('sys_user').where({ username: params.username, password: params.password }).update({ wxid: params.wxid });
         let userToken = {
@@ -79,6 +84,8 @@ async function wxlogin(params) {
     if (info.openid) {
         //检查该微信用户的openid有没有绑定系统账号
         var user = await dbs('base')('sys_user').where({ wxid: info.openid });
+        //异步记录日志
+        log('login', user[0].realname + '登陆了系统', user[0].user_id, null, null);
         if (user && user.length) {
             let userToken = {
                 username: user[0].username,
@@ -86,7 +93,7 @@ async function wxlogin(params) {
                 user_id: user[0].user_id,
                 realname: user[0].realname
             }
-            let token = jwt.sign(userToken, global.secret, { expiresIn: '2h' })
+            let token = jwt.sign(userToken, global.secret, { expiresIn: config.login_expires })
             return {
                 result: true,
                 loginmessage: '登陆成功',
