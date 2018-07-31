@@ -166,7 +166,7 @@ request.get('/api/user/wxlogin',{wxcode:this.params.code}).then(response=>{
             appid: "wx19bcfbbff4ade3e6",
             scope: "snsapi_login", //写死
             redirect_uri: encodeURI(
-              "http://www.htwater.net:8090/get-weixin-code.html?redirect_uri=http://localhost:8080/index.html"
+              "http://www.htwater.net:8090/get-weixin-code.html?redirect_uri="+window.location.origin+"/index.html"
             ),
             state: "",
             style: "black", //二维码黑白风格
