@@ -30,7 +30,8 @@ global.app.use(async(ctx, next) => {
                     message: '您未登录或登陆超时'
                 }
             } else {
-                debugger
+                console.log("error:" + err.message);
+                console.log("error.stack:" + err.stack);
                 if (!err.status) {
                     err.status = 500
                     ctx.status = 500
