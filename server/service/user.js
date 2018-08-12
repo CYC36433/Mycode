@@ -125,6 +125,7 @@ async function getMenu(params, ctx) {
     return result[0]
 }
 async function modulelog(params, ctx) {
+    if (!ctx.user) return;
     let username = ctx.user.realname,
         menuname = params.name,
         path = params.path;
