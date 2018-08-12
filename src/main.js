@@ -91,9 +91,10 @@ function initVue() {
 
     });
     r.afterEach((to, from) => {
-        if (to.path != "/login") {
-            request.get('/api/user/modulelog', { name: to.name, path: to.path });
+		if (to.path == "/login" || to.path == "/") {
+            return;
         }
+        request.get('/api/user/modulelog', { name: to.name, path: to.path });
     });
     new Vue({
         el: '#app',
