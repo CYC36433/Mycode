@@ -86,7 +86,7 @@ export default {
   },
   mounted() {
     this.$nextTick(() => {
-      this.map = this.$refs.mappanel.htMap;
+      this.map = this.$refs.mappanel.map;
       var vm = this;
       this.map.on("moveend", e => {
         vm.setInfo();
@@ -182,27 +182,6 @@ export default {
       a.style.display = "none";
       this.$el.parentNode.appendChild(a);
       a.click();
-      // foreach (var r in f.geometry.rings)
-      //           {
-      //               List<MyPointF> ring = new List<MyPointF>();
-      //               foreach (var p in r)
-      //               {
-      //                   double x = p[0].Value, y = p[1].Value;
-      //                   //归零
-      //                   x = x - task.xmin;
-      //                   y = y - task.ymin;
-      //                   //处理比例
-      //                   double xbili = task.width / (task.xmax - task.xmin);
-      //                   double ybili = task.height / (task.ymax - task.ymin);
-      //                   x = x * xbili;
-      //                   y = y * ybili;
-      //                   //相对X轴翻转
-      //                   y = task.height - y;
-      //                   MyPointF point = new MyPointF() { X = x, Y = y };
-      //                   ring.Add(point);
-      //               }
-      //               list_ring.Add(ring);
-      //           }
     }
   }
 };

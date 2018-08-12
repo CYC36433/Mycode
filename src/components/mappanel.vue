@@ -12,28 +12,28 @@
 
 <script>
     import htmap from "@/components/htmap"
-    import SYSCONFIG from "../../../static/config"
+    import SYSCONFIG from "../../static/config"
     import resize from 'vue-draggable-resizable'
     export default {
         name: "mappanel",
         data() {
             return {
                 datashow: true,
-                htMap: null,
-                currentMapCenter: null
+                map:null,
+                $lmap:null
             };
         },
         props: [
             'datawidth'
         ],
         components: {
-            htmap: htmap,
-            resize: resize
+            htmap,
+            resize
         },
         mounted: function() {
             this.$nextTick(() => {
-                this.htMap = this.$refs.htmap.map
-                //this.listenFullScreen();
+                this.map = this.$refs.htmap.map;
+                this.$lmap = this.$refs.htmap.$lmap;
             });
         },
         methods: {
@@ -41,7 +41,7 @@
                 this.datashow = !this.datashow
             },
             centerAt: function(lng, lat, marker, animation, zoom) {
-                this.htMap.flyTo([lat, lng], zoom);
+                this.map.flyTo([lat, lng], zoom);
                 marker && marker.openPopup();
                 // 自定义动画
                 if (typeof animation == "undefined" || animation) {
@@ -64,42 +64,16 @@
                 var marker = L.marker([lat, lng], {
                     icon: myIcon,
                     zIndexOffset: -10
-                }).addTo(this.htMap);
+                }).addTo(this.map);
                 setTimeout(function() {
                     marker.remove();
                 }, 2000);
-            },
-            listenFullScreen: function() {
-                var vm = this;
-                if (FullScreen.supportsFullScreen) {
-                    document.addEventListener(
-                        FullScreen.fullScreenEventName,
-                        function() {
-                            if (FullScreen.isFullScreen()) {
-                                $("#app").addClass("full-screen");
-                                $("#app .divpanel")
-                                    .find(".full-screen-btn")
-                                    .empty()
-                                    .append("<i class='fa fa-reply'></i><span>退出全屏</span>");
-                            } else {
-                                $("#app").removeClass("full-screen");
-                                $("#app .divpanel")
-                                    .find(".full-screen-btn")
-                                    .empty()
-                                    .append("<i class='fa fa-arrows-alt'></i><span>全屏</span>");
-                                vm.htMap.invalidateSize(true);
-                            }
-                        },
-                        false
-                    );
-                }
             }
         }
     };
 </script>
 
-<style>
-    
+<style scoped>
     .mappanel {
         width: 100%;
         height: 100%;
