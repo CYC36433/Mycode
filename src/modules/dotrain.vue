@@ -119,7 +119,7 @@
 
         let url = "/api/sql/getDayRain"
         request.get(url,params).then(response => {
-          this.tabledata = response.data
+          this.tabledata = response
         })
       }
     }
