@@ -6,7 +6,9 @@
                 <i class="el-icon-caret-left"></i>
             </div>
         </resize>
-        <htmap class='divmap' ref="htmap"></htmap>
+        <htmap class='divmap' ref="htmap">
+            <slot name="map"></slot>
+        </htmap>
     </div>
 </template>
 
