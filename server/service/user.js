@@ -5,7 +5,7 @@ const axios = require('axios')
 const config = require('../config')
 
 async function getUsers(params) {
-    var u = await dbs("htbus").select("*").from("sys_user")
+    var u = await dbs("base").select(["user_id", "realname", "username", "email", "mobile", "wxid", "status", "order_num", "create_time"]).from("sys_user")
     return u
 }
 async function login(params) {
@@ -132,6 +132,16 @@ async function modulelog(params, ctx) {
 
     log('modulevist', `${username}访问了菜单模块：${menuname}`, ctx.user_id, path)
 }
+
+async function updateUser(params) {
+    let b = await dbs('base')('sys_user').where('user_id', params.user_id).update(params)
+    return b;
+}
+
+async function delUser(params) {
+    let b = await dbs('base')('sys_user').where('user_id', params.user_id).del();
+    return b;
+}
 module.exports = {
     getUsers,
     login,
@@ -139,5 +149,7 @@ module.exports = {
     bindwx,
     current,
     getMenu,
-    modulelog
+    modulelog,
+    updateUser,
+    delUser
 }
