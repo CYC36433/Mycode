@@ -6,7 +6,7 @@
       <el-switch v-model="vcityline"></el-switch>
       边框
       <el-switch v-model="vrectangle"></el-switch>
-      间距<el-input-number v-model="offset" :precision="1" :step="0.1" :max="1" size="mini"></el-input-number>
+      间距<el-input-number v-model="offset" :precision="2" :step="0.05" :max="1" size="mini"></el-input-number>
       <div>
         width:{{info.width}}<br> height:{{info.height}}
         <br> xmin:{{info.xmin}}
@@ -16,7 +16,7 @@
         <br>
       </div>
       
-      <el-button @click='downbln'>导出bln文件</el-button>
+      <el-input v-model="chouxi" style="width:60px;"></el-input><el-button @click='downbln'>导出bln文件</el-button>
     </div>
   </mappanel>
 </template>
@@ -46,7 +46,8 @@ export default {
         ymin: 0,
         ymax: 0
       },
-      blndata: null
+      blndata: null,
+      chouxi:0
     };
   },
   computed: {},
@@ -171,6 +172,18 @@ export default {
           return { X: x, Y: y };
         });
       });
+
+      //抽稀
+      if(this.chouxi>0){
+        var dd=[];
+        arr.forEach((a,i)=>{
+          let l = a.filter((o,j)=>{
+            return j%this.chouxi === 0;
+          });
+          dd.push(l);
+        });
+        arr = dd;
+      }
 
       let a = document.createElement("a");
       a.setAttribute(
