@@ -18,7 +18,16 @@ global.app.use(async(ctx, next) => {
                     let payload = await verify(token.split(' ')[1], global.secret)
                     ctx.user = payload
                 } catch (err) {
-                    console.log('token verify fail: ', err)
+                    if (err.message === "jwt expired") {
+                        ctx.status = 408
+                        ctx.body = {
+                            success: 0,
+                            message: '登陆超时请重新登陆'
+                        }
+                        console.log("登陆超时");
+                    } else {
+                        console.log('token verify fail: ', err)
+                    }
                 }
             }
             await next() //此中间件是第一个加载的中间件，在此之后有添加jwtKoa({secret})，此处await会被jwtKoa抛出异常， 所以会被以下的catch处理
@@ -27,7 +36,7 @@ global.app.use(async(ctx, next) => {
                 ctx.status = 401
                 ctx.body = {
                     success: 0,
-                    message: '您未登录或登陆超时'
+                    message: '操作未授权'
                 }
             } else {
                 console.log("error:" + err.message);

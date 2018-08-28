@@ -27,12 +27,30 @@ axios.interceptors.response.use(response => {
             duration: 3 * 1000,
             dangerouslyUseHTMLString: true
         })
+    } else if (error.response.status === 401) {
+        Message({
+            message: "401ERROR：操作未授权请联系管理员",
+            type: 'error',
+            duration: 3 * 1000,
+            dangerouslyUseHTMLString: true
+        })
+    } else if (error.response.status === 408) {
+        VueCookies.remove('token')
+        Message({
+            message: "登陆信息已过期<br>即将跳转到登陆页面",
+            type: 'error',
+            duration: 3 * 1000,
+            dangerouslyUseHTMLString: true,
+            onClose() {
+                window.location.href = '/#/login'
+            }
+        })
     } else {
         VueCookies.remove('token')
         Message({
             message: error.message + "<br>即将跳转到登陆页面",
             type: 'error',
-            duration: 5 * 1000,
+            duration: 3 * 1000,
             dangerouslyUseHTMLString: true,
             onClose() {
                 window.location.href = '/#/login'
