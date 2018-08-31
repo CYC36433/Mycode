@@ -1,23 +1,83 @@
 <template>
   <mappanel :datawidth="388" ref="mappanel">
-    <div style="padding:10px;line-height:40px;">
-      <el-input placeholder="行政区" v-model="keyword"></el-input>
-      <el-button type="primary" size="small" @click="getLines">获取边界</el-button><br> 边界
-      <el-switch v-model="vcityline"></el-switch>
-      边框
-      <el-switch v-model="vrectangle"></el-switch>
-      间距<el-input-number v-model="offset" :precision="2" :step="0.05" :max="1" size="mini"></el-input-number>
-      <div>
-        width:{{info.width}}<br> height:{{info.height}}
-        <br> xmin:{{info.xmin}}
-        <br> xmax:{{info.xmax}}
-        <br> ymin:{{info.ymin}}
-        <br> ymax:{{info.ymax}}
-        <br>
-      </div>
-      
-      <el-input v-model="chouxi" style="width:60px;"></el-input><el-button @click='downbln'>导出bln文件</el-button>
-    </div>
+    <el-tabs tab-position="left">
+      <el-tab-pane>
+        <span slot="label">
+          <i class="el-icon-location-outline"></i>
+        </span>
+        <div style="padding:10px;line-height:40px;">
+          <el-input placeholder="行政区" v-model="keyword"></el-input>
+          <el-button type="primary" size="small" @click="getLines">获取边界</el-button><br> 边界
+          <el-switch v-model="vcityline"></el-switch>
+          边框
+          <el-switch v-model="vrectangle"></el-switch>
+          间距
+          <el-input-number v-model="offset" :precision="2" :step="0.05" :max="1" size="mini"></el-input-number>
+          <div>
+            width:{{info.width}}<br> height:{{info.height}}
+            <br> xmin:{{info.xmin}}
+            <br> xmax:{{info.xmax}}
+            <br> ymin:{{info.ymin}}
+            <br> ymax:{{info.ymax}}
+            <br>
+          </div>
+          <el-input v-model="chouxi" style="width:60px;"></el-input>
+          <el-button @click='downbln'>导出bln文件</el-button>
+        </div>
+      </el-tab-pane>
+      <el-tab-pane>
+        <span slot="label">
+          <i class="el-icon-edit"></i>
+        </span>
+        <el-form label-position="top">
+          <el-form-item>
+            <span style="text-align:center;display:inline-block; margin-top:20px; width:80%">等值线绘制</span>
+            <el-button type="primary" icon="el-icon-arrow-left" size="mini"></el-button>
+          </el-form-item>
+          <el-form-item label="时间选择" class="timeselect">
+            <div style="width:90%;">
+              <el-button-group>
+                <el-button type="primary">1H</el-button>
+                <el-button type="primary">3H</el-button>
+                <el-button type="primary">6H</el-button>
+                <el-button type="primary">12H</el-button>
+                <el-button type="primary">1D</el-button>
+                <el-button type="primary">2D</el-button>
+                <el-button type="primary">3D</el-button>
+                <el-button type="primary">自定义</el-button>
+              </el-button-group>
+            </div>
+          </el-form-item>
+          <el-form-item label="雨量间隔(mm)">
+            <el-input-number v-model="interval" :step="5" :max="100" size="mini"></el-input-number>
+          </el-form-item>
+          <el-form-item label="级别区分(mm)" class="level">
+            <div style="width=90%">
+              <el-radio-group v-model="level">
+                <el-radio :label="15" border>15</el-radio>
+                <el-radio :label="30" border>30</el-radio>
+                <el-radio :label="45" border>45</el-radio>
+                <el-radio :label="60" border>60</el-radio>
+                <el-radio :label="75" border>75</el-radio>
+                <el-radio :label="90" border>90</el-radio>
+              </el-radio-group>
+            </div>
+            <el-button type="primary">等值线</el-button>
+            <el-button type="primary">等值面</el-button>
+          </el-form-item>
+        </el-form>
+      </el-tab-pane>
+      <el-tab-pane>
+        <span slot="label">
+          <i class="el-icon-setting"></i>
+        </span>
+      </el-tab-pane>
+      <el-tab-pane>
+        <span slot="label">
+          <i class="el-icon-picture-outline"></i>
+        </span>
+      </el-tab-pane>
+    </el-tabs>
   </mappanel>
 </template>
 
@@ -31,11 +91,13 @@ export default {
   },
   data() {
     return {
-      keyword: "临沂",
+      keyword: "浙江",
       map: null,
       cityline: null,
       rectangle: null,
       offset: 0.5,
+      interval: 15,
+      level: 15,
       vrectangle: true,
       vcityline: true,
       info: {
@@ -47,7 +109,7 @@ export default {
         ymax: 0
       },
       blndata: null,
-      chouxi:0
+      chouxi: 0
     };
   },
   computed: {},
@@ -123,7 +185,7 @@ export default {
       });
     },
     setRectangle() {
-      if(!this.cityline) return;
+      if (!this.cityline) return;
       let b = this.cityline.getBounds();
       let bounds = [
         [b.getNorth() + this.offset, b.getWest() - this.offset],
@@ -174,11 +236,11 @@ export default {
       });
 
       //抽稀
-      if(this.chouxi>0){
-        var dd=[];
-        arr.forEach((a,i)=>{
-          let l = a.filter((o,j)=>{
-            return j%this.chouxi === 0;
+      if (this.chouxi > 0) {
+        var dd = [];
+        arr.forEach((a, i) => {
+          let l = a.filter((o, j) => {
+            return j % this.chouxi === 0;
           });
           dd.push(l);
         });
@@ -186,10 +248,7 @@ export default {
       }
 
       let a = document.createElement("a");
-      a.setAttribute(
-        "href",
-        "data:text/plain," + JSON.stringify(arr)
-      );
+      a.setAttribute("href", "data:text/plain," + JSON.stringify(arr));
       a.setAttribute("download", "重命名bln文件.bln");
       a.setAttribute("target", "_blank");
       a.style.display = "none";
@@ -200,5 +259,11 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+/* .timeselect .el-button{
+  
+} */
+.level .el-radio{
+  margin-left: 30px;
+}
 </style>

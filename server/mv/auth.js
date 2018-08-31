@@ -19,12 +19,13 @@ global.app.use(async(ctx, next) => {
                     ctx.user = payload
                 } catch (err) {
                     if (err.message === "jwt expired") {
-                        ctx.status = 408
+                        ctx.status = 403
                         ctx.body = {
                             success: 0,
                             message: '登陆超时请重新登陆'
                         }
                         console.log("登陆超时");
+                        return;
                     } else {
                         console.log('token verify fail: ', err)
                     }

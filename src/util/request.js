@@ -34,7 +34,7 @@ axios.interceptors.response.use(response => {
             duration: 3 * 1000,
             dangerouslyUseHTMLString: true
         })
-    } else if (error.response.status === 408) {
+    } else if (error.response.status === 403) {
         VueCookies.remove('token')
         Message({
             message: "登陆信息已过期<br>即将跳转到登陆页面",
