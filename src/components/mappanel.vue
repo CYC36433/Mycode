@@ -78,7 +78,7 @@
 <style scoped>
     .mappanel {
         width: 100%;
-        height: 100%;
+        height: 900px;
         position: relative !important;
         background: white;
         overflow: hidden;

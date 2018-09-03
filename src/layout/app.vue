@@ -1,15 +1,19 @@
 <template>
     <el-container class="appcontainer">
-      <el-aside :style="sidestyle" id='leftside'>
-        <el-scrollbar>
+      <el-header style="width:100%;">
+        <!-- <el-scrollbar> -->
         <div id='logo'>
           <iconfont name="icon-htwater" style="width:40px;height:40px;"></iconfont><span>{{title}}</span>
+          
         </div>
+        
         <appmenu :menuexpand="menuexpand"></appmenu>
-        </el-scrollbar>
-      </el-aside>
+        <!-- </el-scrollbar> -->
+        <div id="topright">您好{{user.realname}}，<span @click="logout">退出</span></div>
+      </el-header>
+      
       <el-container>
-        <el-header>
+        <!-- <el-header>
           <i class="el-icon-d-arrow-left menu_onoff" :class="{'menu_off':!menuexpand}" @click="toggle" title="展开/折叠"></i>
             <el-breadcrumb class="app-breadcrumb" separator="/">
               <transition-group name="breadcrumb">
@@ -20,7 +24,7 @@
               </transition-group>
             </el-breadcrumb>
           <div id="topright">您好{{user.realname}}，<span @click="logout">退出</span></div>
-        </el-header>
+        </el-header> -->
         <el-main>
           <router-view></router-view>
         </el-main>
@@ -49,7 +53,7 @@
     },
     computed:{
       sidestyle(){
-        return {width:this.menuexpand?"200px":"64px"}
+        return {width:this.menuexpand?"100%":"64px"}
       }
     },
     watch:{
@@ -118,8 +122,8 @@
 overflow-x: hidden;
   }
   .el-header {
-    height: 50px !important;
-    background: rgb(255, 255, 255);;
+    height: 60px !important;
+    background: rgb(48, 65, 86);;
     line-height: 50px;
     padding: 0;
     border-bottom:1px solid rgb(230, 230, 230);
@@ -149,7 +153,7 @@ overflow-x: hidden;
   }
   #logo {
     width: 200px;
-    height: 50px;
+    height: 60px;
     background: rgb(31, 45, 61);
     color:#84c0ff;padding-left:10px;
   }
@@ -162,6 +166,7 @@ overflow-x: hidden;
   #topright {
     float: right;
     margin-right: 10px;
+    color:white
   }
   #topright span {
     cursor: pointer;

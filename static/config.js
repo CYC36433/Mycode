@@ -15,11 +15,11 @@ const _system_config = {
         maxbounds: undefined, //界限范围,拖越范围会回弹 [[40.70081290280357, -74.26963806152345], [40.82991732677597, -74.08716201782228]]
         orther_options: { attributionControl: false }, //其他配置项，参考leaflet的map对象的配置
         baselayers: [
-            // { name: "道路图", type: "group", inithidden: false, items: ["tianditu.normal.map", "tianditu.normal.annotion"] },
+            { name: "道路图", type: "group", inithidden: false, items: ["tianditu.normal.map", "tianditu.normal.annotion"] },
             // { name: "影像图", type: "group", inithidden: true, items: ["tianditu.satellite.map", "tianditu.satellite.annotion"] },
             // { name: "地形图", type: "group", inithidden: true, items: ["tianditu.terrain.map", "tianditu.terrain.annotion"] },
-            { name: "一张图矢量图", type: "arcgis", inithidden: false, url: "http://114.215.249.116:6080/arcgis/rest/services/zjslmap/zjslvectormap/MapServer" },
-            { name: "一张图影像图", type: "arcgis", inithidden: true, url: "http://114.215.249.116:6080/arcgis/rest/services/zjslmap/zjslRasternew/MapServer" }
+            // { name: "一张图矢量图", type: "arcgis", inithidden: false, url: "http://114.215.249.116:6080/arcgis/rest/services/zjslmap/zjslvectormap/MapServer" },
+            // { name: "一张图影像图", type: "arcgis", inithidden: true, url: "http://114.215.249.116:6080/arcgis/rest/services/zjslmap/zjslRasternew/MapServer" }
         ]
     },
     logo: 'logo.png',

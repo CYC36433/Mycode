@@ -35,35 +35,59 @@
             <el-button type="primary" icon="el-icon-arrow-left" size="mini"></el-button>
           </el-form-item>
           <el-form-item label="时间选择" class="timeselect">
-            <div style="width:90%;">
-              <el-button-group>
-                <el-button type="primary">1H</el-button>
-                <el-button type="primary">3H</el-button>
-                <el-button type="primary">6H</el-button>
-                <el-button type="primary">12H</el-button>
-                <el-button type="primary">1D</el-button>
-                <el-button type="primary">2D</el-button>
-                <el-button type="primary">3D</el-button>
-                <el-button type="primary">自定义</el-button>
+            <div style="width:95%;">
+              <el-button-group style='width:100%'>
+                <el-button type="primary" size="medium" plain style='width:25%;'>1H</el-button>
+                <el-button type="primary" size="medium" plain style='width:25%;'>3H</el-button>
+                <el-button type="primary" size="medium" plain style='width:25%;'>6H</el-button>
+                <el-button type="primary" size="medium" plain style='width:25%;'> 12H</el-button>
+              </el-button-group>
+              <el-button-group style='margin-top:5px;width:100%'>
+                <el-button type="primary" size="medium" plain style='width:25%;'>1D</el-button>
+                <el-button type="primary" size="medium" plain style='width:25%;'>2D</el-button>
+                <el-button type="primary" size="medium" plain style='width:25%;'>3D</el-button>
+                <el-button type="primary" size="medium" plain style='width:25%;'>自定义</el-button>
               </el-button-group>
             </div>
           </el-form-item>
           <el-form-item label="雨量间隔(mm)">
-            <el-input-number v-model="interval" :step="5" :max="100" size="mini"></el-input-number>
+            <div style='text-align:center;'>
+              <el-input-number v-model="interval" :step="5" :max="100" size="mini"></el-input-number>
+            </div>
           </el-form-item>
           <el-form-item label="级别区分(mm)" class="level">
             <div style="width=90%">
-              <el-radio-group v-model="level">
-                <el-radio :label="15" border>15</el-radio>
+              <el-checkbox-group v-model="level">
+                <el-checkbox label="1">
+                  <el-input v-model="level1" size='mini' style='width:100px'></el-input>
+                </el-checkbox>
+                <el-checkbox label="2">
+                  <el-input v-model="level2" size='mini' style='width:100px'></el-input>
+                </el-checkbox>
+                <br>
+                <el-checkbox label="3">
+                  <el-input v-model="level3" size='mini' style='width:100px'></el-input>
+                </el-checkbox>
+                <el-checkbox label="4">
+                  <el-input v-model="level4" size='mini' style='width:100px'></el-input>
+                </el-checkbox>
+                <br>
+                <el-checkbox label="5">
+                  <el-input v-model="level5" size='mini' style='width:100px'></el-input>
+                </el-checkbox>
+                <el-checkbox label="6">
+                  <el-input v-model="level6" size='mini' style='width:100px'></el-input>
+                </el-checkbox>
+                <!-- <el-radio :label="15" border>15</el-radio>
                 <el-radio :label="30" border>30</el-radio>
                 <el-radio :label="45" border>45</el-radio>
                 <el-radio :label="60" border>60</el-radio>
                 <el-radio :label="75" border>75</el-radio>
-                <el-radio :label="90" border>90</el-radio>
-              </el-radio-group>
+                <el-radio :label="90" border>90</el-radio> -->
+              </el-checkbox-group>
             </div>
-            <el-button type="primary">等值线</el-button>
-            <el-button type="primary">等值面</el-button>
+            <el-button type="primary" size="medium" style='width:42%'>等值线</el-button>
+            <el-button type="primary" size="medium" style='width:42%'>等值面</el-button>
           </el-form-item>
         </el-form>
       </el-tab-pane>
@@ -97,7 +121,13 @@ export default {
       rectangle: null,
       offset: 0.5,
       interval: 15,
-      level: 15,
+      level: ['1','2','3','4','5','6'],
+      level1:15,
+      level2:30,
+      level3:45,
+      level4:60,
+      level5:75,
+      level6:90,
       vrectangle: true,
       vcityline: true,
       info: {
